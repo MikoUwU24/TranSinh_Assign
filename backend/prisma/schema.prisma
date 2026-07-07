@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum FormStatus {
+  ACTIVE
+  DRAFT
+}
+
+enum FieldType {
+  TEXT
+  NUMBER
+  DATE
+  COLOR
+  SELECT
+}
+
+model Form {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  order       Int        @default(0)
+  status      FormStatus @default(DRAFT)
+  fields      Field[]
+  submissions Submission[]
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  @@map("forms")
+  @@index([status, order])
+}
+
+model Field {
+  id        String    @id @default(cuid())
+  formId    String    @map("form_id")
+  label     String
+  type      FieldType
+  order     Int       @default(0)
+  required  Boolean   @default(false)
+  // JSON array of strings for select type; null for other types
+  options   Json?
+  // Soft-delete: set when field has existing submissions to preserve data integrity
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  form    Form               @relation(fields: [formId], references: [id], onDelete: Cascade)
+  answers SubmissionAnswer[]
+
+  @@map("fields")
+  @@index([formId, order])
+}
+
+model Submission {
+  id        String             @id @default(cuid())
+  formId    String             @map("form_id")
+  // Track who submitted (sw username from JWT)
+  submittedBy String?          @map("submitted_by")
+  answers   SubmissionAnswer[]
+  createdAt DateTime           @default(now()) @map("created_at")
+  updatedAt DateTime           @updatedAt @map("updated_at")
+
+  form Form @relation(fields: [formId], references: [id])
+
+  @@map("submissions")
+}
+
+model SubmissionAnswer {
+  id           String  @id @default(cuid())
+  submissionId String  @map("submission_id")
+  fieldId      String  @map("field_id")
+  // TEXT stores all field type values; JSON-serialized for arrays if needed
+  value        String?
+
+  submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  field      Field      @relation(fields: [fieldId], references: [id])
+
+  @@map("submission_answers")
+}
