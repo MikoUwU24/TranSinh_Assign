@@ -17,7 +17,7 @@ export class FieldRepository {
         type: data.type,
         order: data.order ?? 0,
         required: data.required ?? false,
-        options: data.options ? JSON.stringify(data.options) : null,
+        options: data.options ? (data.options as any) : null,
       },
     });
   }
@@ -30,7 +30,7 @@ export class FieldRepository {
       required: data.required,
     };
     if (data.options !== undefined) {
-      updateData.options = data.options ? JSON.stringify(data.options) : null;
+      updateData.options = data.options ? (data.options as any) : null;
     }
     return prisma.field.update({
       where: { id },

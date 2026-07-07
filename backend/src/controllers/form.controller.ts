@@ -23,7 +23,7 @@ export class FormController {
   };
 
   getFormById = async (req: Request, res: Response): Promise<void> => {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const data = await this.formService.getFormById(id);
     res.json({ success: true, data });
   };
@@ -44,7 +44,7 @@ export class FormController {
   };
 
   updateForm = async (req: Request, res: Response): Promise<void> => {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const { title, description, order, status } = req.body;
 
     const data = await this.formService.updateForm(id, {
@@ -57,7 +57,7 @@ export class FormController {
   };
 
   deleteForm = async (req: Request, res: Response): Promise<void> => {
-    const { id } = req.params;
+    const id = req.params.id as string;
     await this.formService.deleteForm(id);
     res.json({ success: true, data: { message: 'Xóa form thành công' } });
   };

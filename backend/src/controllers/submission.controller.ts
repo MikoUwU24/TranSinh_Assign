@@ -6,7 +6,7 @@ export class SubmissionController {
   private submissionService = new SubmissionService();
 
   submitForm = async (req: Request, res: Response): Promise<void> => {
-    const { id: formId } = req.params;
+    const formId = req.params.id as string;
     const { answers } = req.body;
     
     // Track who submitted from JWT

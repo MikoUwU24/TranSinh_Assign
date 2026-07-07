@@ -7,7 +7,7 @@ export class FieldController {
   private fieldService = new FieldService();
 
   addField = async (req: Request, res: Response): Promise<void> => {
-    const { id: formId } = req.params;
+    const formId = req.params.id as string;
     const { label, type, order, required, options } = req.body;
 
     if (!label || typeof label !== 'string' || label.trim() === '') {
@@ -35,7 +35,8 @@ export class FieldController {
   };
 
   updateField = async (req: Request, res: Response): Promise<void> => {
-    const { id: formId, fid: fieldId } = req.params;
+    const formId = req.params.id as string;
+    const fieldId = req.params.fid as string;
     const { label, type, order, required, options } = req.body;
 
     if (type !== undefined && !Object.values(FieldType).includes(type)) {
@@ -60,13 +61,14 @@ export class FieldController {
   };
 
   deleteField = async (req: Request, res: Response): Promise<void> => {
-    const { id: formId, fid: fieldId } = req.params;
+    const formId = req.params.id as string;
+    const fieldId = req.params.fid as string;
     await this.fieldService.deleteField(formId, fieldId);
     res.json({ success: true, data: { message: 'Xóa trường thành công' } });
   };
 
   reorderFields = async (req: Request, res: Response): Promise<void> => {
-    const { id: formId } = req.params;
+    const formId = req.params.id as string;
     const { fields } = req.body;
 
     if (!fields || !Array.isArray(fields)) {
