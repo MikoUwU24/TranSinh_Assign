@@ -85,3 +85,14 @@ model SubmissionAnswer {
 
   @@map("submission_answers")
 }
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  role      String   @default("sw") // "admin" hoặc "sw"
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}

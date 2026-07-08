@@ -5,7 +5,8 @@ import { asyncWrapper } from '../middlewares/async-wrapper';
 
 const router = Router();
 
-router.post('/login', AuthController.login);
+router.post('/login', asyncWrapper(AuthController.login));
+router.post('/register', asyncWrapper(AuthController.register));
 router.get('/me', authenticate, AuthController.me);
 
 export default router;
