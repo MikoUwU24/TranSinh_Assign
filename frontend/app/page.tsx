@@ -40,7 +40,10 @@ export default function Home() {
           padding: '8px',
           borderRadius: '50%',
           border: '1px solid var(--border-color)',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         {theme === 'light' ? '🌙' : '☀️'}
@@ -63,15 +66,12 @@ export default function Home() {
         </p>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '24px',
+      <div className="form-grid-responsive" style={{
         width: '100%',
         maxWidth: '700px'
       }}>
         {/* Admin portal card */}
-        <Link href="/admin/login" className="glass animate-scale-in" style={{
+        <Link href="/login" className="glass animate-scale-in card-responsive" style={{
           padding: '40px',
           borderRadius: 'var(--radius-lg)',
           textAlign: 'center',
@@ -92,18 +92,6 @@ export default function Home() {
           e.currentTarget.style.borderColor = 'var(--border-color)';
           e.currentTarget.style.transform = 'translateY(0)';
         }}>
-          <div style={{
-            width: '64px',
-            height: '64px',
-            borderRadius: '50%',
-            backgroundColor: 'var(--primary-light)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '2rem'
-          }}>
-            ⚙️
-          </div>
           <h2 style={{ fontSize: '1.5rem' }}>Quản trị viên (Admin)</h2>
           <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
             Tạo mới form, cấu hình các trường dữ liệu động, thiết lập điều kiện validate và kiểm tra kết quả khảo sát từ nhân viên.
@@ -111,7 +99,7 @@ export default function Home() {
         </Link>
 
         {/* SW portal card */}
-        <Link href="/sw/login" className="glass animate-scale-in" style={{
+        <Link href="/login" className="glass animate-scale-in card-responsive" style={{
           padding: '40px',
           borderRadius: 'var(--radius-lg)',
           textAlign: 'center',
@@ -132,18 +120,6 @@ export default function Home() {
           e.currentTarget.style.borderColor = 'var(--border-color)';
           e.currentTarget.style.transform = 'translateY(0)';
         }}>
-          <div style={{
-            width: '64px',
-            height: '64px',
-            borderRadius: '50%',
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '2rem'
-          }}>
-            📝
-          </div>
           <h2 style={{ fontSize: '1.5rem' }}>Nhân viên (SW)</h2>
           <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
             Xem danh sách các form khảo sát đang hoạt động, điền thông tin báo cáo định kỳ và xem lịch sử các lượt nộp của mình.

@@ -4,7 +4,7 @@ Hệ thống quản lý form động toàn diện (Dynamic Form Builder) gồm B
 
 ---
 
-## 🔑 Tài Khoản Đăng Nhập Mặc Định
+## Tài Khoản Đăng Nhập Mặc Định
 
 Hệ thống hỗ trợ phân quyền bằng JWT Token. Các tài khoản kiểm thử mặc định được cấu hình trong file cấu hình môi trường:
 
@@ -15,7 +15,7 @@ Hệ thống hỗ trợ phân quyền bằng JWT Token. Các tài khoản kiểm
 
 ---
 
-## 🛠️ Hướng Dẫn Cài Đặt & Chạy Local
+## Hướng Dẫn Cài Đặt & Chạy Local
 
 ### Cách 1: Chạy bằng Docker Compose (Khuyên dùng)
 Yêu cầu: Đã cài đặt Docker và Docker Compose.
@@ -67,7 +67,7 @@ npm run dev
 
 ---
 
-## 🧪 Chạy Unit Tests
+## Chạy Unit Tests
 
 Hệ thống đã viết sẵn 100% unit tests kiểm thử logic validation cho cả 5 loại trường dữ liệu (TEXT, NUMBER, DATE, COLOR, SELECT) bao gồm các trường hợp dữ liệu hợp lệ (happy path) và các điều kiện biên (edge cases).
 
@@ -79,7 +79,7 @@ npm run test
 
 ---
 
-## 📐 Quyết Định Thiết Kế Hệ Thống
+## Quyết Định Thiết Kế Hệ Thống
 
 ### 1. Giải pháp bảo toàn tính toàn vẹn dữ liệu: Soft-Delete cho Fields (AGENTS.md §5.4)
 Khi admin xóa một trường dữ liệu (Field) khỏi Form:
@@ -101,7 +101,7 @@ Tách biệt hoàn toàn logic validate khỏi tầng controller/service.
 
 ---
 
-## 🚀 Các Tính Năng / Điểm Cộng Đã Hoàn Thành
+## Các Tính Năng / Điểm Cộng Đã Hoàn Thành
 
 - [x] **Full-stack Monorepo**: Giao diện UI Next.js App Router hiện đại, responsive, hỗ trợ Dark / Light Theme đồng bộ.
 - [x] **JWT Authorization**: Phân quyền chi tiết cho Admin và SW User.

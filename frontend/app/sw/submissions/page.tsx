@@ -39,7 +39,7 @@ export default function SwSubmissions() {
 
         {error && (
           <div style={{ padding: '16px', backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--error)', borderRadius: 'var(--radius-md)', marginBottom: '24px' }}>
-            ⚠️ {error}
+            {error}
           </div>
         )}
 
@@ -48,8 +48,7 @@ export default function SwSubmissions() {
             Đang tải lịch sử...
           </div>
         ) : submissions.length === 0 ? (
-          <div className="glass" style={{ textAlign: 'center', padding: '64px', borderRadius: 'var(--radius-lg)' }}>
-            <span style={{ fontSize: '3rem' }}>📝</span>
+          <div className="glass card-responsive" style={{ textAlign: 'center', padding: '64px', borderRadius: 'var(--radius-lg)' }}>
             <h3 style={{ fontSize: '1.25rem', marginTop: '16px', marginBottom: '8px' }}>Bạn chưa nộp biểu mẫu nào</h3>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>Xem danh sách khảo sát khả dụng và tiến hành báo cáo.</p>
             <a href="/sw/forms">
@@ -57,10 +56,10 @@ export default function SwSubmissions() {
             </a>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '32px', alignItems: 'flex-start' }}>
+          <div className="responsive-grid-2col" style={{ alignItems: 'flex-start' }}>
             
             {/* Left Box: Submission List */}
-            <div className="glass" style={{ padding: '24px', borderRadius: 'var(--radius-lg)', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div className="glass card-responsive" style={{ padding: '24px', borderRadius: 'var(--radius-lg)', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <h3 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>Báo cáo đã gửi ({submissions.length})</h3>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -100,10 +99,9 @@ export default function SwSubmissions() {
             </div>
 
             {/* Right Box: Detailed View Panel */}
-            <div className="glass" style={{ padding: '32px', borderRadius: 'var(--radius-lg)', minHeight: '300px', position: 'sticky', top: '90px' }}>
+            <div className="glass card-responsive" style={{ padding: '32px', borderRadius: 'var(--radius-lg)', minHeight: '300px', position: 'sticky', top: '90px' }}>
               {!selectedSub ? (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: '240px', color: 'var(--text-secondary)', textAlign: 'center' }}>
-                  <span style={{ fontSize: '2.5rem' }}>👈</span>
                   <p style={{ marginTop: '12px' }}>Chọn một lượt nộp để xem chi tiết câu trả lời bạn đã gửi</p>
                 </div>
               ) : (

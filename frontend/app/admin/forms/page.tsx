@@ -94,13 +94,13 @@ export default function AdminForms() {
             <p style={{ color: 'var(--text-secondary)' }}>Danh sách các form khảo sát trong hệ thống</p>
           </div>
           <button onClick={() => setIsModalOpen(true)} className="btn-primary">
-            + Tạo Form Mới
+            Tạo Form Mới
           </button>
         </div>
 
         {error && (
           <div style={{ padding: '16px', backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--error)', borderRadius: 'var(--radius-md)', marginBottom: '24px' }}>
-            ⚠️ {error}
+            {error}
           </div>
         )}
 
@@ -109,16 +109,15 @@ export default function AdminForms() {
             Đang tải danh sách form...
           </div>
         ) : forms.length === 0 ? (
-          <div className="glass" style={{ textAlign: 'center', padding: '64px', borderRadius: 'var(--radius-lg)' }}>
-            <span style={{ fontSize: '3rem' }}>📂</span>
+          <div className="glass card-responsive" style={{ textAlign: 'center', padding: '64px', borderRadius: 'var(--radius-lg)' }}>
             <h3 style={{ fontSize: '1.25rem', marginTop: '16px', marginBottom: '8px' }}>Chưa có form nào</h3>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>Bắt đầu bằng cách tạo form mới để cấu hình khảo sát</p>
             <button onClick={() => setIsModalOpen(true)} className="btn-primary">Tạo Form Đầu Tiên</button>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '24px' }}>
+          <div className="form-grid-responsive">
             {forms.map((form) => (
-              <div key={form.id} className="glass" style={{
+              <div key={form.id} className="glass card-responsive" style={{
                 borderRadius: 'var(--radius-lg)',
                 padding: '28px',
                 display: 'flex',
@@ -163,7 +162,7 @@ export default function AdminForms() {
                 <div style={{ display: 'flex', gap: '12px', borderTop: '1px solid var(--border-color)', paddingTop: '16px' }}>
                   <Link href={`/admin/forms/${form.id}`} style={{ flex: 1 }}>
                     <button className="btn-secondary" style={{ width: '100%', padding: '8px 16px', fontSize: '0.85rem' }}>
-                      ⚙️ Cấu hình Field
+                      Cấu hình
                     </button>
                   </Link>
                   <button
@@ -171,7 +170,7 @@ export default function AdminForms() {
                     className="btn-danger"
                     style={{ padding: '8px 16px', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >
-                    🗑️
+                    Xóa
                   </button>
                 </div>
               </div>
@@ -195,7 +194,7 @@ export default function AdminForms() {
           zIndex: 1000,
           padding: '24px'
         }}>
-          <div className="glass animate-scale-in" style={{
+          <div className="glass animate-scale-in modal-responsive" style={{
             width: '100%',
             maxWidth: '500px',
             borderRadius: 'var(--radius-lg)',
@@ -207,7 +206,7 @@ export default function AdminForms() {
             <form onSubmit={handleCreateForm} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {modalError && (
                 <div style={{ padding: '12px', backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--error)', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem' }}>
-                  ⚠️ {modalError}
+                  {modalError}
                 </div>
               )}
 
@@ -237,6 +236,7 @@ export default function AdminForms() {
                   <label style={{ fontSize: '0.85rem', fontWeight: 600 }}>Thứ tự hiển thị</label>
                   <input
                     type="number"
+                    min={0}
                     value={order}
                     onChange={(e) => setOrder(e.target.value)}
                   />

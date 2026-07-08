@@ -42,13 +42,7 @@ export async function apiRequest<T = any>(path: string, options: RequestOptions 
     // Session expired or invalid
     if (response.status === 401 && typeof window !== 'undefined') {
       localStorage.clear();
-      // Redirect to correct login based on role path if possible
-      const pathname = window.location.pathname;
-      if (pathname.startsWith('/admin')) {
-        window.location.href = '/admin/login';
-      } else {
-        window.location.href = '/sw/login';
-      }
+      window.location.href = '/login';
     }
 
     const errMsg = json.error?.message || response.statusText || 'Đã có lỗi xảy ra';

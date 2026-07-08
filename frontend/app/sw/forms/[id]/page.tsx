@@ -129,19 +129,19 @@ export default function SwFillForm() {
       <main style={{ flex: 1, padding: '40px 24px', maxWidth: '750px', width: '100%', margin: '0 auto' }} className="animate-fade-in">
         <div style={{ marginBottom: '24px' }}>
           <Link href="/sw/forms" style={{ color: 'var(--primary)', fontSize: '0.9rem', fontWeight: 600 }}>
-            ← Quay lại danh sách
+            Quay lại danh sách
           </Link>
         </div>
 
         {error && (
           <div style={{ padding: '16px', backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--error)', borderRadius: 'var(--radius-md)', marginBottom: '24px' }}>
-            ⚠️ {error}
+            {error}
           </div>
         )}
 
         {submitSuccess && (
           <div style={{ padding: '20px', backgroundColor: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)', borderRadius: 'var(--radius-md)', marginBottom: '24px', textAlign: 'center' }}>
-            🎉 <strong>Nộp form thành công!</strong> Đang chuyển hướng bạn về trang lịch sử...
+            <strong>Nộp form thành công!</strong> Đang chuyển hướng bạn về trang lịch sử...
           </div>
         )}
 
@@ -152,7 +152,7 @@ export default function SwFillForm() {
         ) : !form ? (
           <div style={{ textAlign: 'center', padding: '64px' }}>Biểu mẫu không tồn tại</div>
         ) : (
-          <div className="glass" style={{ padding: '40px', borderRadius: 'var(--radius-lg)' }}>
+          <div className="glass card-responsive" style={{ padding: '40px', borderRadius: 'var(--radius-lg)' }}>
             <div style={{ marginBottom: '32px', borderBottom: '1px solid var(--border-color)', paddingBottom: '24px' }}>
               <h1 style={{ fontSize: '2rem', marginBottom: '8px' }}>{form.title}</h1>
               <p style={{ color: 'var(--text-secondary)', whiteSpace: 'pre-line' }}>{form.description || 'Vui lòng điền đầy đủ các thông tin theo yêu cầu.'}</p>
@@ -198,6 +198,7 @@ export default function SwFillForm() {
                     {field.type === 'NUMBER' && (
                       <input
                         type="number"
+                        min={0}
                         placeholder="Nhập số từ 0 - 100..."
                         value={formValues[field.id] || ''}
                         onChange={(e) => handleInputChange(field.id, e.target.value)}
@@ -263,7 +264,7 @@ export default function SwFillForm() {
                     {/* Error display under the field */}
                     {isInvalid && (
                       <span style={{ color: 'var(--error)', fontSize: '0.8rem', fontWeight: 500 }}>
-                        ⚠️ {errorMsg}
+                        {errorMsg}
                       </span>
                     )}
                   </div>

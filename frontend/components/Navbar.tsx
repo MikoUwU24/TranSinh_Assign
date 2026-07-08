@@ -29,15 +29,11 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.clear();
-    if (role === 'admin') {
-      router.push('/admin/login');
-    } else {
-      router.push('/sw/login');
-    }
+    router.push('/login');
   };
 
   return (
-    <nav className="glass" style={{
+    <nav className="glass navbar-responsive" style={{
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -52,7 +48,7 @@ export default function Navbar() {
       backdropFilter: 'blur(16px)',
       width: '100%'
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
         <Link href={role === 'admin' ? '/admin/forms' : '/sw/forms'} style={{
           fontSize: '1.25rem',
           fontWeight: 800,
@@ -61,11 +57,11 @@ export default function Navbar() {
           WebkitTextFillColor: 'transparent',
           letterSpacing: '-0.03em',
         }}>
-          💡 FormBuilder
+          FormBuilder
         </Link>
         
         {role === 'admin' && (
-          <div style={{ display: 'flex', gap: '16px' }}>
+          <div className="navbar-links" style={{ display: 'flex', gap: '16px' }}>
             <Link href="/admin/forms" style={{
               fontSize: '0.9rem',
               fontWeight: 500,
@@ -84,7 +80,7 @@ export default function Navbar() {
         )}
 
         {role === 'sw' && (
-          <div style={{ display: 'flex', gap: '16px' }}>
+          <div className="navbar-links" style={{ display: 'flex', gap: '16px' }}>
             <Link href="/sw/forms" style={{
               fontSize: '0.9rem',
               fontWeight: 500,
@@ -103,7 +99,7 @@ export default function Navbar() {
         )}
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
         {username && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{
@@ -129,7 +125,8 @@ export default function Navbar() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            border: '1px solid var(--border-color)'
+            border: '1px solid var(--border-color)',
+            cursor: 'pointer'
           }}
           title="Đổi giao diện"
         >

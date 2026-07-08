@@ -39,7 +39,7 @@ export default function SwForms() {
 
         {error && (
           <div style={{ padding: '16px', backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--error)', borderRadius: 'var(--radius-md)', marginBottom: '24px' }}>
-            ⚠️ {error}
+            {error}
           </div>
         )}
 
@@ -48,20 +48,21 @@ export default function SwForms() {
             Đang tải danh sách biểu mẫu...
           </div>
         ) : activeForms.length === 0 ? (
-          <div className="glass" style={{ textAlign: 'center', padding: '64px', borderRadius: 'var(--radius-lg)' }}>
-            <span style={{ fontSize: '3rem' }}>💤</span>
+          <div className="glass card-responsive" style={{ textAlign: 'center', padding: '64px', borderRadius: 'var(--radius-lg)' }}>
             <h3 style={{ fontSize: '1.25rem', marginTop: '16px', marginBottom: '8px' }}>Chưa có biểu mẫu nào hoạt động</h3>
             <p style={{ color: 'var(--text-secondary)' }}>Hiện tại chưa có form nào được xuất bản ở trạng thái hoạt động (Active).</p>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {activeForms.map((form) => (
-              <div key={form.id} className="glass animate-scale-in" style={{
+              <div key={form.id} className="glass animate-scale-in card-responsive" style={{
                 padding: '32px',
                 borderRadius: 'var(--radius-lg)',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '20px',
                 backgroundColor: 'var(--bg-secondary)',
                 boxShadow: 'var(--shadow-md)',
                 borderLeft: '5px solid var(--primary)',
@@ -73,7 +74,7 @@ export default function SwForms() {
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
               }}>
-                <div style={{ flex: 1, paddingRight: '24px' }}>
+                <div style={{ flex: 1, minWidth: '250px' }}>
                   <h3 style={{ fontSize: '1.4rem', marginBottom: '8px' }}>{form.title}</h3>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', whiteSpace: 'pre-line' }}>
                     {form.description || 'Không có mô tả chi tiết.'}
@@ -87,7 +88,7 @@ export default function SwForms() {
                 <div>
                   <Link href={`/sw/forms/${form.id}`}>
                     <button className="btn-primary" style={{ whiteSpace: 'nowrap' }}>
-                      ✏️ Điền Form
+                      Điền Form
                     </button>
                   </Link>
                 </div>

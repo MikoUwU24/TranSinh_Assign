@@ -228,13 +228,13 @@ export default function FormDetail() {
       <main style={{ flex: 1, padding: '40px 24px', maxWidth: '1200px', width: '100%', margin: '0 auto' }} className="animate-fade-in">
         <div style={{ marginBottom: '24px' }}>
           <Link href="/admin/forms" style={{ color: 'var(--primary)', fontSize: '0.9rem', fontWeight: 600 }}>
-            ← Quay lại danh sách Form
+            Quay lại danh sách Form
           </Link>
         </div>
 
         {error && (
           <div style={{ padding: '16px', backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--error)', borderRadius: 'var(--radius-md)', marginBottom: '24px' }}>
-            ⚠️ {error}
+            {error}
           </div>
         )}
 
@@ -245,10 +245,10 @@ export default function FormDetail() {
         ) : !form ? (
           <div style={{ textAlign: 'center', padding: '64px' }}>Form không tồn tại</div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '32px', alignItems: 'flex-start' }}>
+          <div className="responsive-grid-2col" style={{ alignItems: 'flex-start' }}>
             
             {/* Left Column: Form Details & Actions */}
-            <div className="glass" style={{ padding: '32px', borderRadius: 'var(--radius-lg)' }}>
+            <div className="glass card-responsive" style={{ padding: '32px', borderRadius: 'var(--radius-lg)' }}>
               {!isEditingForm ? (
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -263,7 +263,7 @@ export default function FormDetail() {
                       {form.status === 'ACTIVE' ? 'Hoạt động' : 'Bản nháp'}
                     </span>
                     <button onClick={() => setIsEditingForm(true)} className="btn-secondary" style={{ padding: '6px 12px', fontSize: '0.8rem' }}>
-                      ✏️ Sửa Form
+                      Sửa Form
                     </button>
                   </div>
 
@@ -306,6 +306,7 @@ export default function FormDetail() {
                     <label style={{ fontSize: '0.8rem', fontWeight: 600 }}>Thứ tự hiển thị</label>
                     <input
                       type="number"
+                      min={0}
                       value={editOrder}
                       onChange={(e) => setEditOrder(e.target.value)}
                     />
@@ -332,11 +333,11 @@ export default function FormDetail() {
             </div>
 
             {/* Right Column: Fields Configuration */}
-            <div className="glass" style={{ padding: '32px', borderRadius: 'var(--radius-lg)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+            <div className="glass card-responsive" style={{ padding: '32px', borderRadius: 'var(--radius-lg)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
                 <h3 style={{ fontSize: '1.5rem' }}>Trường Dữ Liệu ({fields.length})</h3>
                 <button onClick={openAddFieldModal} className="btn-primary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>
-                  + Thêm Trường
+                  Thêm Trường
                 </button>
               </div>
 
@@ -414,7 +415,7 @@ export default function FormDetail() {
                             style={{ padding: '8px 12px', fontSize: '0.85rem' }}
                             title="Sửa"
                           >
-                            ✏️
+                            Sửa
                           </button>
                           <button
                             onClick={() => handleDeleteField(field.id, field.label)}
@@ -422,7 +423,7 @@ export default function FormDetail() {
                             style={{ padding: '8px 12px', fontSize: '0.85rem' }}
                             title="Xóa"
                           >
-                            🗑️
+                            Xóa
                           </button>
                         </div>
                       </div>
@@ -451,7 +452,7 @@ export default function FormDetail() {
           zIndex: 1000,
           padding: '24px'
         }}>
-          <div className="glass animate-scale-in" style={{
+          <div className="glass animate-scale-in modal-responsive" style={{
             width: '100%',
             maxWidth: '500px',
             borderRadius: 'var(--radius-lg)',
@@ -465,7 +466,7 @@ export default function FormDetail() {
             <form onSubmit={handleSaveField} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {fieldModalError && (
                 <div style={{ padding: '12px', backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--error)', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem' }}>
-                  ⚠️ {fieldModalError}
+                  {fieldModalError}
                 </div>
               )}
 
@@ -496,6 +497,7 @@ export default function FormDetail() {
                   <label style={{ fontSize: '0.85rem', fontWeight: 600 }}>Thứ tự hiển thị</label>
                   <input
                     type="number"
+                    min={0}
                     value={fieldOrder}
                     onChange={(e) => setFieldOrder(e.target.value)}
                   />
